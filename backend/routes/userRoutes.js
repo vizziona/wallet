@@ -16,31 +16,15 @@ router.post('/set-pin', async (req, res) => {
       return res.status(400).json({ message: 'PIN must be exactly 5 digits' });
     }
 
-    // Check if a user already exists
-    let user = await User.findOne();
-    if (user && user.pinSet) {
-      return res.status(400).json({ 
-        message: 'PIN already set. Cannot create multiple users.' 
-      });
-    }
-
     // Hashing the PIN
     const hashedPin = await bcrypt.hash(pin, 10); 
 
-    if (user) {
-      // Update existing user
-      user.name = name.trim();
-      user.pin = hashedPin;
-      user.pinSet = true;
-      user.updatedAt = Date.now();
-    } else {
-      // Create new user
-      user = new User({
-        name: name.trim(),
-        pin: hashedPin,
-        pinSet: true
-      });
-    }
+    // Create new user
+    const user = new User({
+      name: name.trim(),
+      pin: hashedPin,
+      pinSet: true
+    });
 
     await user.save();
     res.status(201).json({ 
@@ -62,17 +46,24 @@ router.post('/verify-pin', async (req, res) => {
       return res.status(400).json({ message: 'Name and PIN are required' });
     }
 
-    // Find user by name (case-insensitive)
-    const user = await User.findOne({
+    // Find all users with the same name (case-insensitive)
+    const users = await User.find({
       name: { $regex: new RegExp(`^${name.trim()}$`, 'i') }
     });
 
-    if (!user) {
+    if (users.length === 0) {
       return res.status(401).json({ message: 'Invalid Name or PIN' });
     }
 
-    // Verify PIN
-    const isMatch = await bcrypt.compare(pin, user.pin); 
+    // Check if any user matches the PIN
+    let isMatch = false;
+    for (const user of users) {
+      isMatch = await bcrypt.compare(pin, user.pin);
+      if (isMatch) {
+        break;
+      }
+    }
+
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid Name or PIN' });
     }
@@ -85,10 +76,11 @@ router.post('/verify-pin', async (req, res) => {
 });
 
 // Check if PIN is set
-router.get('/check-pin-status', async (req, res) => {
+router.get('/check-pin-status/:name', async (req, res) => {
   try {
-    const user = await User.findOne();
-    res.status(200).json({ pinSet: !!(user && user.pinSet) });
+    const { name } = req.params;
+    const users = await User.find({ name: name.trim() });
+    res.status(200).json({ pinSet: users.length > 0 });
   } catch (error) {
     console.error('Error checking PIN status:', error);
     res.status(500).json({ message: 'Server error' });

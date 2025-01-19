@@ -1,62 +1,11 @@
 import React, { useState } from 'react';
 
-const PinComponent = ({ onPinSubmit, isFirstTime }) => {
+const PinComponent = ({ onPinSubmit }) => {
   const [name, setName] = useState('');
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
   const [error, setError] = useState('');
-
-  const containerStyle = {
-    padding: '2rem',
-    maxWidth: '400px',
-    margin: '2rem auto',
-    borderRadius: '10px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#ffffff',
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-  };
-
-  const titleStyle = {
-    fontSize: '1.5rem',
-    color: '#2d3748',
-    marginBottom: '1.5rem',
-    fontWeight: '600'
-  };
-
-  const inputStyle = {
-    width: '100%',
-    padding: '0.75rem',
-    margin: '0.5rem 0',
-    border: '1px solid #e2e8f0',
-    borderRadius: '0.375rem',
-    fontSize: '1rem',
-    transition: 'border-color 0.2s ease',
-    outline: 'none'
-  };
-
-  const buttonStyle = {
-    backgroundColor: '#4299e1',
-    color: 'white',
-    padding: '0.75rem 1.5rem',
-    borderRadius: '0.375rem',
-    border: 'none',
-    fontSize: '1rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    width: '100%',
-    marginTop: '1rem',
-    transition: 'background-color 0.2s ease'
-  };
-
-  const errorStyle = {
-    color: '#e53e3e',
-    marginTop: '0.5rem',
-    fontSize: '0.875rem'
-  };
-
-  const validatePin = (pin) => {
-    return /^\d{5}$/.test(pin);
-  };
+  const [isFirstTime, setIsFirstTime] = useState(false); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +36,11 @@ const PinComponent = ({ onPinSubmit, isFirstTime }) => {
       }
     }
 
-    onPinSubmit(trimmedName, trimmedPin);
+    onPinSubmit(trimmedName, trimmedPin, isFirstTime);
+  };
+
+  const validatePin = (pin) => {
+    return /^\d{5}$/.test(pin);
   };
 
   return (
@@ -125,14 +78,68 @@ const PinComponent = ({ onPinSubmit, isFirstTime }) => {
           type="submit" 
           style={buttonStyle}
           onMouseOver={e => e.target.style.backgroundColor = '#144141'}
-          onMouseOut={e => e.target.style.backgroundColor = '#144141'}
+          onMouseOut={e => e.target.style.backgroundColor = '#1d6e6e'}
         >
-          Unlock
+          {isFirstTime ? 'Set PIN' : 'Unlock'}
         </button>
       </form>
+      <button
+        style={{ ...buttonStyle, backgroundColor: '#3b82f6', marginTop: '0.5rem' }}
+        onClick={() => setIsFirstTime(!isFirstTime)}
+      >
+        {isFirstTime ? 'I am an Existing User' : 'I am a New User'}
+      </button>
       {error && <p style={errorStyle}>{error}</p>}
     </div>
   );
+};
+
+const containerStyle = {
+  padding: '2rem',
+  maxWidth: '400px',
+  margin: '2rem auto',
+  borderRadius: '10px',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#ffffff',
+  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+};
+
+const titleStyle = {
+  fontSize: '1.5rem',
+  color: '#2d3748',
+  marginBottom: '1.5rem',
+  fontWeight: '600'
+};
+
+const inputStyle = {
+  width: '100%',
+  padding: '0.75rem',
+  margin: '0.5rem 0',
+  border: '1px solid #e2e8f0',
+  borderRadius: '0.375rem',
+  fontSize: '1rem',
+  transition: 'border-color 0.2s ease',
+  outline: 'none'
+};
+
+const buttonStyle = {
+  backgroundColor: '#1d6e6e',
+  color: 'white',
+  padding: '0.75rem 1.5rem',
+  borderRadius: '0.375rem',
+  border: 'none',
+  fontSize: '1rem',
+  fontWeight: '500',
+  cursor: 'pointer',
+  width: '100%',
+  marginTop: '1rem',
+  transition: 'background-color 0.2s ease'
+};
+
+const errorStyle = {
+  color: '#e53e3e',
+  marginTop: '0.5rem',
+  fontSize: '0.875rem'
 };
 
 export default PinComponent;

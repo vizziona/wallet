@@ -17,7 +17,7 @@ const Home = () => {
 
   const checkPinStatus = async () => {
     try {
-      const response = await axios.get('https://wallet-fdje.onrender.com/api/user/check-pin-status');
+      const response = await axios.get('http://localhost:5000/api/user/check-pin-status');
       setIsFirstTime(!response.data.pinSet);
     } catch (error) {
       console.error('Error checking PIN status:', error);
@@ -29,14 +29,14 @@ const Home = () => {
     setShowPin(true); // Show the PIN modal
   };
 
-  const handlePinSubmit = async (name, pin) => {
+  const handlePinSubmit = async (name, pin, isFirstTime) => {
     try {
       const endpoint = isFirstTime ? 'set-pin' : 'verify-pin';
       const response = await axios.post(
-        `https://wallet-fdje.onrender.com/api/user/${endpoint}`,
+        `http://localhost:5000/api/user/${endpoint}`,
         { name, pin }
       );
-
+  
       if (response.status === 200 || response.status === 201) {
         setError('');
         setShowPin(false);
@@ -81,7 +81,7 @@ const Home = () => {
             <span className={styles.gradientText}>Smart Wallet</span>
           </h1>
           <p className={styles.subtitle}>
-            Track your income, expenses, and budgets effortlessly with intelligent finance management platform.
+            Track your income, expenses, and budgets effortlessly with Smart Wallet web.
           </p>
         </div>
 
