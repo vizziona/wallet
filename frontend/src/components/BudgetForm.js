@@ -65,14 +65,14 @@ const BudgetForm = ({ onClose }) => {
       padding: '0.75rem',
       borderRadius: '4px',
       border: 'none',
-      backgroundColor: '#007bff',
+      backgroundColor: '#144141',
       color: '#fff',
       fontSize: '1rem',
       cursor: 'pointer',
       transition: 'background-color 0.3s ease',
     },
     buttonHover: {
-      backgroundColor: '#0056b3',
+      backgroundColor: '#1d6e6e',
     },
     modal: {
       position: 'fixed',

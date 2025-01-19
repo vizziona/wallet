@@ -17,7 +17,7 @@ const Home = () => {
 
   const checkPinStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/user/check-pin-status');
+      const response = await axios.get('https://wallet-fdje.onrender.com/api/user/check-pin-status');
       setIsFirstTime(!response.data.pinSet);
     } catch (error) {
       console.error('Error checking PIN status:', error);
@@ -33,7 +33,7 @@ const Home = () => {
     try {
       const endpoint = isFirstTime ? 'set-pin' : 'verify-pin';
       const response = await axios.post(
-        `http://localhost:5000/api/user/${endpoint}`,
+        `https://wallet-fdje.onrender.com/api/user/${endpoint}`,
         { name, pin }
       );
 
@@ -77,7 +77,7 @@ const Home = () => {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            Dear Eric Get Access to your{' '}
+            Get Access to your{' '}
             <span className={styles.gradientText}>Smart Wallet</span>
           </h1>
           <p className={styles.subtitle}>

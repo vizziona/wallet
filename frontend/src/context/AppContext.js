@@ -12,7 +12,7 @@ const AppProvider = ({ children }) => {
   // Fetch transactions
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/transactions');
+      const response = await axios.get('https://wallet-fdje.onrender.com/api/transactions');
       console.log('Fetched transactions:', response.data);
       setTransactions(response.data);
     } catch (error) {
@@ -24,7 +24,7 @@ const AppProvider = ({ children }) => {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/categories');
+      const response = await axios.get('https://wallet-fdje.onrender.com/api/categories');
       console.log('Fetched categories:', response.data);
       setCategories(response.data);
     } catch (error) {
@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
   // Fetch budget
   const fetchBudget = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/budget');
+      const response = await axios.get('https://wallet-fdje.onrender.com/api/budget');
       console.log('Fetched budget:', response.data);
       setBudget(response.data);
     } catch (error) {
@@ -49,7 +49,7 @@ const AppProvider = ({ children }) => {
   const addTransaction = async (transaction) => {
     try {
       console.log('Sending transaction to backend:', transaction); 
-      const response = await axios.post('http://localhost:5000/api/transactions', transaction);
+      const response = await axios.post('https://wallet-fdje.onrender.com/api/transactions', transaction);
       console.log('Backend response:', response.data); 
       setTransactions([...transactions, response.data]);
     } catch (error) {
@@ -62,7 +62,7 @@ const AppProvider = ({ children }) => {
   const addCategory = async (category) => {
     try {
       console.log('Sending category to backend:', category);
-      const response = await axios.post('http://localhost:5000/api/categories', category);
+      const response = await axios.post('https://wallet-fdje.onrender.com/api/categories', category);
       console.log('Backend response:', response.data); 
       setCategories([...categories, response.data]);
     } catch (error) {
@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
   const updateBudget = async (newBudget) => {
     try {
       console.log('Sending budget to backend:', newBudget);
-      const response = await axios.post('http://localhost:5000/api/budget', newBudget);
+      const response = await axios.post('https://wallet-fdje.onrender.com/api/budget', newBudget);
       console.log('Backend response:', response.data); 
       setBudget(response.data);
     } catch (error) {

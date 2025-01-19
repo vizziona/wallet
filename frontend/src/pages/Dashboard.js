@@ -94,13 +94,18 @@ const Dashboard = () => {
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h1 className="h2 mb-0 text-black fw-bold">Transactions Dashboard</h1>
             <div className="d-flex gap-2">
-              <button
+            <button
                 className="btn btn-primary d-flex align-items-center gap-2 shadow-sm"
                 onClick={() => setShowTransactionForm(true)}
+                style={{
+                  backgroundColor: '#144141',
+                  borderColor: '#144141',
+                  color: 'white', 
+                }}
               >
-                <Plus size={20} />
-                Add Transaction
-              </button>
+          <Plus size={20} />
+         Add Transaction
+          </button>
               <button
                 className="btn btn-secondary d-flex align-items-center gap-2 shadow-sm"
                 onClick={() => setShowBudgetForm(true)}
@@ -187,7 +192,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <div className="d-flex align-items-center text-primary mb-2">
                     <Wallet size={20} className="me-2" />
-                    <h5 className="card-title mb-0">Total Balance</h5>
+                    <h5 className="card-title mb-0">Net Balance</h5>
                   </div>
                   <p className="h3 mb-0 fw-bold">{(totalIncome - totalExpenses).toFixed(2)} RWF</p>
                 </div>
@@ -213,7 +218,7 @@ const Dashboard = () => {
             <div className="col-md-6">
               <div className="card h-100 shadow-sm border-0">
                 <div className="card-body">
-                  <h5 className="card-title mb-4 text-primary fw-bold">Income vs Expenses</h5>
+                  <h5 className="card-title mb-4 text-success fw-bold">Income vs Expenses</h5>
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={chartData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
@@ -253,7 +258,7 @@ const Dashboard = () => {
             <div className="col-md-6">
               <div className="card h-100 shadow-sm border-0">
                 <div className="card-body">
-                  <h5 className="card-title mb-4 text-primary fw-bold">Expenses by Category</h5>
+                  <h5 className="card-title mb-4 text-success fw-bold">Expenses by Category</h5>
                   <PieChart width={500} height={300}>
                     <Pie
                       data={categoryData}

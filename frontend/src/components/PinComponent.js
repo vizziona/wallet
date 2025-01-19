@@ -124,10 +124,10 @@ const PinComponent = ({ onPinSubmit, isFirstTime }) => {
         <button 
           type="submit" 
           style={buttonStyle}
-          onMouseOver={e => e.target.style.backgroundColor = '#3182ce'}
-          onMouseOut={e => e.target.style.backgroundColor = '#4299e1'}
+          onMouseOver={e => e.target.style.backgroundColor = '#144141'}
+          onMouseOut={e => e.target.style.backgroundColor = '#144141'}
         >
-          Submit
+          Unlock
         </button>
       </form>
       {error && <p style={errorStyle}>{error}</p>}

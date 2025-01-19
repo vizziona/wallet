@@ -61,7 +61,7 @@ const TransactionForm = ({ onClose }) => {
       display: 'flex',
       flexDirection: 'column',
       gap: '1rem',
-      maxWidth: '400px',
+      maxWidth: '800px',
       margin: '2rem auto',
       padding: '2rem',
       borderRadius: '8px',
@@ -85,14 +85,14 @@ const TransactionForm = ({ onClose }) => {
       padding: '0.75rem',
       borderRadius: '4px',
       border: 'none',
-      backgroundColor: '#007bff',
+      backgroundColor: '#144141',
       color: '#fff',
       fontSize: '1rem',
       cursor: 'pointer',
       transition: 'background-color 0.3s ease',
     },
     buttonHover: {
-      backgroundColor: '#0056b3',
+      backgroundColor: '#1d6e6e',
     },
     modal: {
       position: 'fixed',
@@ -140,7 +140,7 @@ const TransactionForm = ({ onClose }) => {
     <>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div className="form-container">
-          <div className="d-flex justify-content-between align-items-center mb-1">
+          <div className="d-flex justify-content-between align-items-center mb-3">
             <h5 className="mb-0">New Transaction</h5>
             <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
           </div>

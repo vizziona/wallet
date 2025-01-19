@@ -1,6 +1,8 @@
 .container {
     min-height: 100vh;
-    background: linear-gradient(to bottom right, #f0f7ff, #f6f3ff);
+    background-image: url("./assets//home.png");
+    background-size: cover;
+    background-position: center;
     padding: 4rem 1rem;
   }
   
@@ -17,7 +19,8 @@
   .title {
     font-size: 3.5rem;
     font-weight: bold;
-    color: #1a1a1a;
+    /* color: #1a1a1a; */
+    color: rgb(210, 202, 202);
     margin-bottom: 1.5rem;
     line-height: 1.2;
   }
@@ -31,7 +34,7 @@
   
   .subtitle {
     font-size: 1.25rem;
-    color: #666;
+    color: #dacece;
     max-width: 36rem;
     margin: 0 auto;
   }
@@ -56,7 +59,7 @@
   }
   
   .featureCard {
-    background: white;
+    background: #144141;
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -78,25 +81,60 @@
   .featureTitle {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: #dacece;
     margin-bottom: 0.5rem;
   }
   
   .featureDescription {
-    color: #666;
+    color: #bcb1b1;
   }
   
   .ctaButton {
     background: linear-gradient(to right, #2563eb, #9333ea);
     color: white;
     font-weight: 600;
-    padding: 1rem 2rem;
+    height: 110px;
+    width: 110px;
     border-radius: 9999px;
     border: none;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     text-decoration: none;
+    position: relative;
   }
+
+  .ctaButton::before,
+  .ctaButton::after {
+    content: '';
+    position: absolute;
+    border: 2px solid #2563eb;
+    left: -20px;
+    right: -20px;
+    top: -20px;
+    bottom: -20px;
+    border-radius: 50%;
+    animation: wave 1.5s linear infinite;
+    opacity: 0;
+    }
+
+    .ctaButton::after {
+        animation: wave 1.5s linear infinite 0.75s;
+    }
+
+    @keyframes wave {
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(1.2);
+            opacity: 0;
+        }
+    }
+
   
   .ctaButton:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
