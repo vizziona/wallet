@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); 
 const User = require('../models/User');
 
 // Set PIN (only allowed once)
@@ -25,7 +25,7 @@ router.post('/set-pin', async (req, res) => {
     }
 
     // Hashing the PIN
-    const hashedPin = await bcrypt.hash(pin, 10);
+    const hashedPin = await bcrypt.hash(pin, 10); 
 
     if (user) {
       // Update existing user
@@ -72,7 +72,7 @@ router.post('/verify-pin', async (req, res) => {
     }
 
     // Verify PIN
-    const isMatch = await bcrypt.compare(pin, user.pin);
+    const isMatch = await bcrypt.compare(pin, user.pin); 
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid Name or PIN' });
     }
