@@ -21,12 +21,11 @@ const Home = () => {
       setIsFirstTime(!response.data.pinSet);
     } catch (error) {
       console.error('Error checking PIN status:', error);
-      setError('Failed to check PIN status');
     }
   };
 
   const handleUnlockClick = () => {
-    setShowPin(true); // Show the PIN modal
+    setShowPin(true);
   };
 
   const handlePinSubmit = async (name, pin, isFirstTime) => {
@@ -38,6 +37,8 @@ const Home = () => {
       );
   
       if (response.status === 200 || response.status === 201) {
+        localStorage.setItem('name', name);
+        localStorage.setItem('pin', pin);
         setError('');
         setShowPin(false);
         navigate('/dashboard');
