@@ -46,3 +46,8 @@ PORT=port_number
 
 The server will run on https://neon-sable-2a5922.netlify.app
 
+for Demo use 
+
+ name: eric
+ PIN : 00000
+
